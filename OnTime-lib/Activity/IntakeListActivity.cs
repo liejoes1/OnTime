@@ -26,5 +26,10 @@ namespace OnTime_lib.Activity
         {
            return _intakeList.WeekOf;
         }
+
+        public List<string> GetIntakeCode()
+        {
+            return _intakeList.IntakeCode;
+        }
     }
 }

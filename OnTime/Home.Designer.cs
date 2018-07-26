@@ -28,37 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tb_intake_code = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // button1
+            // tb_intake_code
             // 
-            this.button1.Location = new System.Drawing.Point(98, 77);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(143, 36);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Download";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(172, 221);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.tb_intake_code.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tb_intake_code.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.tb_intake_code.BackColor = System.Drawing.Color.White;
+            this.tb_intake_code.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_intake_code.Location = new System.Drawing.Point(499, 275);
+            this.tb_intake_code.Name = "tb_intake_code";
+            this.tb_intake_code.Size = new System.Drawing.Size(429, 49);
+            this.tb_intake_code.TabIndex = 2;
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(827, 475);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
+            this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.tb_intake_code);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Home";
             this.Text = "Home";
             this.Load += new System.EventHandler(this.Home_Load);
@@ -68,8 +60,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tb_intake_code;
     }
 }

@@ -16,17 +16,27 @@ namespace OnTime
         public Home()
         {
             InitializeComponent();
+            
         }
 
         private void Home_Load(object sender, EventArgs e)
         {
+            IntakeListActivity intakeListActivity = new IntakeListActivity();
+            //label1.Text = intakeListActivity.GetWeek();
 
+            tb_intake_code.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            tb_intake_code.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            var autoComplete = new AutoCompleteStringCollection();
+            autoComplete.AddRange(intakeListActivity.GetIntakeCode().ToArray());
+            tb_intake_code.AutoCompleteCustomSource = autoComplete;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            IntakeListActivity intakeListActivity = new IntakeListActivity();
-            label1.Text = intakeListActivity.GetWeek();
+
+
+
+ 
         }
 
         private void label1_Click(object sender, EventArgs e)
