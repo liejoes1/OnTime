@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnTime-winform", "OnTime\OnTime-winform.csproj", "{5B2241E5-EEAC-4CFA-8AA1-4CF377DABBA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnTime-lib", "OnTime-lib\OnTime-lib.csproj", "{EC972288-3031-4ED4-8057-A4A9FBDA0847}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B2241E5-EEAC-4CFA-8AA1-4CF377DABBA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B2241E5-EEAC-4CFA-8AA1-4CF377DABBA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B2241E5-EEAC-4CFA-8AA1-4CF377DABBA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B2241E5-EEAC-4CFA-8AA1-4CF377DABBA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC972288-3031-4ED4-8057-A4A9FBDA0847}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC972288-3031-4ED4-8057-A4A9FBDA0847}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC972288-3031-4ED4-8057-A4A9FBDA0847}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC972288-3031-4ED4-8057-A4A9FBDA0847}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D30F448-6934-4AEA-B083-52F0C0C3DA1C}
+	EndGlobalSection
+EndGlobal
