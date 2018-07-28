@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using OnTime_lib.Network;
 
@@ -10,7 +12,7 @@ namespace OnTime_lib.Activity
 {
     public class IntakeTimetableActivity
     {
-        public void GetIntakeTimetable()
+        public async void GetIntakeTimetable()
         {
             //Before Download, create the directory first, if not exist
             //If Exist just leave it alone
@@ -25,9 +27,9 @@ namespace OnTime_lib.Activity
             string fileCombine = Path.Combine(folderCombine, Path.GetFileName(GlobalData.FileName));
             DownloadData download = new DownloadData();
             download.IntakeTimeTable(GlobalData.IntakeCodeUrl, fileCombine);
-
-            //Unzip the File
-
+            string folderExportCombine = Path.Combine(folderCombine, GlobalData.ExtractFolderName);
+            
+            ZipFile.ExtractToDirectory(fileCombine, folderExportCombine);
         }
 
         private void ClearFolder(string FolderName)

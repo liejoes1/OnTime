@@ -21,6 +21,7 @@ namespace OnTime_lib
         public static readonly string FileLocationBase = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         public const string FolderName = "OnTime";
         public const string FileName = "Timetable.zip";
+        public const string ExtractFolderName = "Extract";
 
         // Shared Variable
         public static string IntakeCodeUrl;

@@ -32,8 +32,9 @@ namespace OnTime_lib.Network
             using (var client = new WebClient())
             {
 
-                client.DownloadFile(url, location);
+                client.DownloadFile(new Uri(url), location);
             }
+
         }
     }
 }
