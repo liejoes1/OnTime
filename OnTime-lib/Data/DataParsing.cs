@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json;
@@ -49,11 +51,11 @@ namespace OnTime_lib.Data
 
             var rootObject = JObject.Parse(jsonResult);
 
-            date = (string)rootObject["week"]["@for"];
+            
             var weeksize = ((JArray)rootObject["week"]["day"]).Count;
 
             for (var i = 0; i < weeksize; i++)
-            {
+            {            
                 var classsize = ((JArray)rootObject["week"]["day"][i]["class"]).Count;
                 for (var j = 0; j < classsize; j++)
                 {
@@ -61,10 +63,39 @@ namespace OnTime_lib.Data
                     location = (string)rootObject["week"]["day"][i]["class"][j]["location"];
                     startTime = (string)rootObject["week"]["day"][i]["class"][j]["start"];
                     endTime = (string)rootObject["week"]["day"][i]["class"][j]["end"];
+                    date = startTime.Substring(0, 10);
                     intakeTimetables.Add(new IntakeTimetable(date, startTime, endTime, location, module));
                 }              
             }          
             return intakeTimetables;
+        }
+
+
+        public static void ParseTimeTableByDay(List<IntakeTimetable> intakeTimetables)
+        {
+            foreach (var t in intakeTimetables)
+            {
+                string dayOfWeek = DateTime.ParseExact(t.Date, "yyyy-MM-dd", CultureInfo.InvariantCulture).ToString("ddd").ToUpper();
+
+                switch (dayOfWeek)
+                {
+                    case "MON":
+                        GlobalData.MondayTimetables.Add(t);
+                        break;
+                    case "TUE":
+                        GlobalData.TuesdayTimetables.Add(t);
+                        break;
+                    case "WED":
+                        GlobalData.WednesdayTimetables.Add(t);
+                        break;
+                    case "THU":
+                        GlobalData.ThursdayTimetables.Add(t);
+                        break;
+                    case "FRI":
+                        GlobalData.FridayTimetables.Add(t);
+                        break;
+                }
+            }
         }
     }
 }

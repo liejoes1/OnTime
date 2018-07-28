@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnTime_lib.Model
 {
-    class IntakeTimetable
+    public class IntakeTimetable
     {
         public string Date { get;}
 

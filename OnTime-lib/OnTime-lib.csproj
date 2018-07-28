@@ -52,6 +52,7 @@
     <Compile Include="Activity\IntakeTimetableActivity.cs" />
     <Compile Include="Data\DataConversion.cs" />
     <Compile Include="Data\DataParsing.cs" />
+    <Compile Include="Model\IntakeResult.cs" />
     <Compile Include="Model\IntakeTimetable.cs" />
     <Compile Include="Network\DownloadData.cs" />
     <Compile Include="GlobalData.cs" />

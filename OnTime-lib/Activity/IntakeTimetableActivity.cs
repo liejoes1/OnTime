@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace OnTime_lib.Activity
     public class IntakeTimetableActivity
     {
         private static List<IntakeTimetable> _intakeTimetable;
-        public async void GetIntakeTimetable()
+        public void GetIntakeTimetable()
         {
             string folderCombine = Path.Combine(GlobalData.FileLocationBase, GlobalData.FolderName);
             string fileCombine = Path.Combine(folderCombine, Path.GetFileName(GlobalData.FileName));
@@ -25,7 +26,7 @@ namespace OnTime_lib.Activity
             //Before Download, create the directory first, if not exist
             //If Exist just leave it alone
             Directory.CreateDirectory(Path.Combine(folderCombine));
-
+            
             //Delete everything on that folder
             ClearFolder(folderCombine);
 
@@ -40,10 +41,7 @@ namespace OnTime_lib.Activity
             //Read XML File and Convert to List of TimeTable
             _intakeTimetable = new DataParsing().ParseTimeTable(new DownloadLocalData().XmlFile(xmlfileCombine));
 
-            string loc = _intakeTimetable[0].Location;
-
-
-
+            DataParsing.ParseTimeTableByDay(_intakeTimetable);
         }
 
         private void ClearFolder(string FolderName)
@@ -60,6 +58,48 @@ namespace OnTime_lib.Activity
             {
                 ClearFolder(di.FullName);
                 di.Delete();
+            }
+        }
+
+        public List<IntakeResult> GetTimetableDay(string day)
+        {
+            List<IntakeResult> listResult = new List<IntakeResult>();
+
+
+            List<TimetableDayClass> timetableDayClasses = new List<TimetableDayClass>();
+
+            timetableDayClasses.Add(new TimetableDayClass("MON", GlobalData.MondayTimetables));
+            timetableDayClasses.Add(new TimetableDayClass("TUE", GlobalData.TuesdayTimetables));
+            timetableDayClasses.Add(new TimetableDayClass("WED", GlobalData.WednesdayTimetables));
+            timetableDayClasses.Add(new TimetableDayClass("THU", GlobalData.ThursdayTimetables));
+            timetableDayClasses.Add(new TimetableDayClass("FRI", GlobalData.FridayTimetables));
+
+            foreach (var i in timetableDayClasses)
+            {
+                if (!day.ToUpper().Equals(i.WeekDay)) continue;
+                foreach (var j in i.IntakeTimetables)
+                {
+                    string date = DateTime.ParseExact(j.Date, "yyyy-MM-dd", CultureInfo.InvariantCulture).ToString("dd MMM");
+                    string time = j.StartTime.Substring(11, 5) + " - " + j.EndTime.Substring(11, 5);
+                    string location = j.Location;
+                    string module = j.Module;
+                    listResult.Add(new IntakeResult(date, time, location, module));
+                }
+            }
+            return listResult;
+        }
+
+
+        public class TimetableDayClass
+        {
+            public string WeekDay { get; set; }
+
+            public List<IntakeTimetable> IntakeTimetables { get; set; }
+
+            public TimetableDayClass(string weekDay, List<IntakeTimetable> intakeTimetables )
+            {
+                WeekDay = weekDay;
+                IntakeTimetables = intakeTimetables;
             }
         }
     }
