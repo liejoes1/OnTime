@@ -6,7 +6,6 @@ namespace OnTime_lib.Network
 {
     class DownloadData
     {
-
         public string IntakeList()
         {
             string result = "";
@@ -31,10 +30,8 @@ namespace OnTime_lib.Network
         {
             using (var client = new WebClient())
             {
-
                 client.DownloadFile(new Uri(url), location);
             }
-
         }
     }
 }

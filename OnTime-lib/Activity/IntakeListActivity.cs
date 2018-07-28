@@ -20,7 +20,7 @@ namespace OnTime_lib.Activity
             string intakeListData = download.IntakeList();
 
             DataParsing dataParsing = new DataParsing();
-            _intakeList = dataParsing.ParseTimeTableList(intakeListData);
+            _intakeList = dataParsing.ParseIntakeList(intakeListData);
         }
 
         public string GetWeek()

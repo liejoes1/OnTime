@@ -22,6 +22,7 @@ namespace OnTime_lib
         public const string FolderName = "OnTime";
         public const string FileName = "Timetable.zip";
         public const string ExtractFolderName = "Extract";
+        public const string XmlFileName = "timetable.xml";
 
         // Shared Variable
         public static string IntakeCodeUrl;

@@ -50,10 +50,13 @@
     <Compile Include="Activity\IntakeCheckActivity.cs" />
     <Compile Include="Activity\IntakeListActivity.cs" />
     <Compile Include="Activity\IntakeTimetableActivity.cs" />
+    <Compile Include="Data\DataConversion.cs" />
     <Compile Include="Data\DataParsing.cs" />
+    <Compile Include="Model\IntakeTimetable.cs" />
     <Compile Include="Network\DownloadData.cs" />
     <Compile Include="GlobalData.cs" />
     <Compile Include="Model\IntakeList.cs" />
+    <Compile Include="Network\DownloadLocalData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
