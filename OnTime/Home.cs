@@ -15,72 +15,61 @@ namespace OnTime
     {
         public Home()
         {
-            InitializeComponent();
-            
+            InitializeComponent();          
         }
 
         private void Home_Load(object sender, EventArgs e)
         {
-            IntakeListActivity intakeListActivity = new IntakeListActivity();
-            //label1.Text = intakeListActivity.GetWeek();
+            var intakeListActivity = new IntakeListActivity();
 
+            // Set Autocomplete
             tb_intake_code.AutoCompleteMode = AutoCompleteMode.Suggest;
             tb_intake_code.AutoCompleteSource = AutoCompleteSource.CustomSource;
             var autoComplete = new AutoCompleteStringCollection();
             autoComplete.AddRange(intakeListActivity.GetIntakeCode().ToArray());
             tb_intake_code.AutoCompleteCustomSource = autoComplete;
+            // Set Week
+            lbl_week_value.Text = intakeListActivity.GetWeek();
 
-            link_lbl_go.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            lbl_message.Visible = false;
+
+            link_lbl_go.LinkBehavior = LinkBehavior.NeverUnderline;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
 
-
-
- 
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_2(object sender, EventArgs e)
-        {
-
-        }
 
         private void link_lbl_go_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            IntakeListActivity intakeListActivity = new IntakeListActivity();
-            string result = tb_intake_code.Text;
-            bool status = false;
+            var intakeListActivity = new IntakeListActivity();
+            var intakeCheckActivity = new IntakeCheckActivity();
+            var result = tb_intake_code.Text;
+            var errorCode = 0;
 
-            for (int i = 0; i < intakeListActivity.GetIntakeCode().Count; i++)
-            {
+            for (var i = 0; i < intakeListActivity.GetIntakeCode().Count; i++)
                 if (result == intakeListActivity.GetIntakeCode()[i])
                 {
-                    status = true;
-                    lbl_message.Text = "Success";
+                    lbl_message.Visible = false;
+                    errorCode = 3;
                 }
+
+
+            if (!intakeCheckActivity.GetIntakeCheck(result) && errorCode == 3)
+            {
+                errorCode = 1;
             }
 
-            if (!status)
+
+            if (errorCode == 0)
             {
+                lbl_message.Visible = true;
                 lbl_message.Text = "Invalid Intake Code";
             }
 
-        }
-
-        private void lbl_message_Click(object sender, EventArgs e)
-        {
-
+            if (errorCode == 1)
+            {
+                lbl_message.Visible = true;
+                lbl_message.Text = "You have no class on this week.";
+            }
         }
     }
 }

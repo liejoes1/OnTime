@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,10 @@ namespace OnTime_lib.Activity
 
         public string GetWeek()
         {
-           return _intakeList.WeekOf;
+            //Reformat the DateTimw
+
+            _intakeList.WeekOf = DateTime.ParseExact(_intakeList.WeekOf, "yyyy-M-dd", CultureInfo.InvariantCulture).ToString("d MMM yyyy");
+            return _intakeList.WeekOf;
         }
 
         public List<string> GetIntakeCode()

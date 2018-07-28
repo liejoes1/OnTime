@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity\IntakeCheckActivity.cs" />
     <Compile Include="Activity\IntakeListActivity.cs" />
     <Compile Include="Data\DataParsing.cs" />
     <Compile Include="Network\DownloadData.cs" />
