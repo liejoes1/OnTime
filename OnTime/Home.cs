@@ -42,34 +42,48 @@ namespace OnTime
         {
             var intakeListActivity = new IntakeListActivity();
             var intakeCheckActivity = new IntakeCheckActivity();
+            var intakeTimetableActivity = new IntakeTimetableActivity();
+            
             var result = tb_intake_code.Text;
             var errorCode = 0;
 
             for (var i = 0; i < intakeListActivity.GetIntakeCode().Count; i++)
                 if (result == intakeListActivity.GetIntakeCode()[i])
                 {
-                    lbl_message.Visible = false;
                     errorCode = 3;
                 }
-
 
             if (!intakeCheckActivity.GetIntakeCheck(result) && errorCode == 3)
             {
                 errorCode = 1;
             }
 
-
-            if (errorCode == 0)
+            switch (errorCode)
             {
-                lbl_message.Visible = true;
-                lbl_message.Text = "Invalid Intake Code";
-            }
-
-            if (errorCode == 1)
-            {
-                lbl_message.Visible = true;
-                lbl_message.Text = "You have no class on this week.";
+                case 0:
+                    lbl_message.Visible = true;
+                    lbl_message.Text = "Invalid Intake Code";
+                    break;
+                case 1:
+                    lbl_message.Visible = true;
+                    lbl_message.Text = "You have no class on this week.";
+                    break;
+                case 3:
+                    lbl_message.Visible = false;
+                    //Download the data if no error
+                    intakeTimetableActivity.GetIntakeTimetable();
+                    break;
             }
         }
     }
 }
+
+
+/*
+ *  References
+ *
+ *  ErrorCode
+ *  0 -> Invalid Intake
+ *  1 -> No Class
+ *  3 -> OK No Problem
+ */

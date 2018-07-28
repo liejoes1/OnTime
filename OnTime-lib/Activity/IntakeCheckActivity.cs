@@ -22,6 +22,8 @@ namespace OnTime_lib.Activity
                 //If No Class, return error
                 return false;
             }
+
+            GlobalData.IntakeCodeUrl = intakeInfoData;          
             return true;
         }
 

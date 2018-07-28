@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,5 +15,14 @@ namespace OnTime_lib
 
         public const string NoClassIntakeError = "Time table for the current week is not available for this intake code.";
 
+
+
+        // File Act
+        public static readonly string FileLocationBase = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public const string FolderName = "OnTime";
+        public const string FileName = "Timetable.zip";
+
+        // Shared Variable
+        public static string IntakeCodeUrl;
     }
 }

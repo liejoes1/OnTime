@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
+using System.Reflection.Emit;
 
 namespace OnTime_lib.Network
 {
@@ -25,5 +27,13 @@ namespace OnTime_lib.Network
             return result;
         }
 
+        public void IntakeTimeTable(string url, string location)
+        {
+            using (var client = new WebClient())
+            {
+
+                client.DownloadFile(url, location);
+            }
+        }
     }
 }
