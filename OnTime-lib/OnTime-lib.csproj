@@ -50,8 +50,10 @@
     <Compile Include="Activity\IntakeCheckActivity.cs" />
     <Compile Include="Activity\IntakeListActivity.cs" />
     <Compile Include="Activity\IntakeTimetableActivity.cs" />
+    <Compile Include="Activity\StartupActivity.cs" />
     <Compile Include="Data\DataConversion.cs" />
     <Compile Include="Data\DataParsing.cs" />
+    <Compile Include="Model\Cache.cs" />
     <Compile Include="Model\IntakeResult.cs" />
     <Compile Include="Model\IntakeTimetable.cs" />
     <Compile Include="Network\DownloadData.cs" />

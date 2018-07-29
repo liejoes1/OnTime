@@ -17,8 +17,8 @@ namespace OnTime
         {
             //Before showing the form, get Data first
 
-            IntakeListActivity intakeListActivity = new IntakeListActivity();
-            intakeListActivity.GetIntakeList();
+            StartupActivity startup = new StartupActivity();
+            startup.start();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using OnTime_lib.Activity;
 using OnTime_lib.Model;
 
 namespace OnTime_lib.Data
@@ -50,8 +52,7 @@ namespace OnTime_lib.Data
             var jsonResult = JsonConvert.SerializeXmlNode(doc);
 
             var rootObject = JObject.Parse(jsonResult);
-
-            
+          
             var weeksize = ((JArray)rootObject["week"]["day"]).Count;
 
             for (var i = 0; i < weeksize; i++)
@@ -73,6 +74,13 @@ namespace OnTime_lib.Data
 
         public static void ParseTimeTableByDay(List<IntakeTimetable> intakeTimetables)
         {
+            //Clear Data
+            GlobalData.MondayTimetables.Clear();
+            GlobalData.TuesdayTimetables.Clear();
+            GlobalData.WednesdayTimetables.Clear();
+            GlobalData.ThursdayTimetables.Clear();
+            GlobalData.FridayTimetables.Clear();
+
             foreach (var t in intakeTimetables)
             {
                 string dayOfWeek = DateTime.ParseExact(t.Date, "yyyy-MM-dd", CultureInfo.InvariantCulture).ToString("ddd").ToUpper();
@@ -96,6 +104,27 @@ namespace OnTime_lib.Data
                         break;
                 }
             }
+        }
+
+        public void SerializingCache(string path, Cache obj)
+        {
+            using (StreamWriter file = File.CreateText(path))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                //serialize object directly into file stream
+                serializer.Serialize(file, obj);
+            }
+        }
+
+        public Cache ParseCache(string result)
+        {
+            var rootObject = JObject.Parse(result);
+
+            var type = (string) rootObject["Type"];
+            var intakeCode = (string) rootObject["IntakeCode"];
+            var intakeUrl = (string) rootObject["IntakeUrl"];
+
+            return new Cache(type, intakeCode, intakeUrl);
         }
     }
 }

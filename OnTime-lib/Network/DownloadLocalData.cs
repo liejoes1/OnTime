@@ -16,5 +16,16 @@ namespace OnTime_lib.Network
             doc.Load(path);
             return doc.OuterXml;
         }
+
+        public bool ContainIntakeHtmlFile(string path, string intake)
+        {
+            return System.IO.File.ReadAllText(path).Contains(intake);
+        }
+
+        public string ReadCacheFile(string path)
+        {
+            return System.IO.File.ReadAllText(path);
+        }
+
     }
 }

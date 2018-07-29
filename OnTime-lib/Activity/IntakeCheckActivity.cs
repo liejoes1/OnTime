@@ -23,6 +23,7 @@ namespace OnTime_lib.Activity
                 return false;
             }
 
+            GlobalData.IntakeCode = intakeCode;
             GlobalData.IntakeCodeUrl = intakeInfoData;          
             return true;
         }

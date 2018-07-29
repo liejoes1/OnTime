@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+using Newtonsoft.Json;
 using OnTime_lib.Data;
 using OnTime_lib.Model;
 using OnTime_lib.Network;
@@ -23,6 +24,7 @@ namespace OnTime_lib.Activity
             string fileCombine = Path.Combine(folderCombine, Path.GetFileName(GlobalData.FileName));
             string folderExportCombine = Path.Combine(folderCombine, GlobalData.ExtractFolderName);
             string xmlfileCombine = Path.Combine(folderExportCombine, GlobalData.XmlFileName);
+            string cacheCombine = Path.Combine(folderCombine, GlobalData.CacheFileName);
             //Before Download, create the directory first, if not exist
             //If Exist just leave it alone
             Directory.CreateDirectory(Path.Combine(folderCombine));
@@ -37,6 +39,10 @@ namespace OnTime_lib.Activity
             
             //Extract the File
             ZipFile.ExtractToDirectory(fileCombine, folderExportCombine);
+
+            //Store Cache File
+            DataParsing dataParsing = new DataParsing();
+            dataParsing.SerializingCache(cacheCombine, new Cache("Cache", GlobalData.IntakeCode, GlobalData.IntakeCodeUrl));
 
             //Read XML File and Convert to List of TimeTable
             _intakeTimetable = new DataParsing().ParseTimeTable(new DownloadLocalData().XmlFile(xmlfileCombine));
@@ -89,6 +95,16 @@ namespace OnTime_lib.Activity
             return listResult;
         }
 
+        public void GetSavedTimetable()
+        {
+            string folderCombine = Path.Combine(GlobalData.FileLocationBase, GlobalData.FolderName);
+            string folderExportCombine = Path.Combine(folderCombine, GlobalData.ExtractFolderName);
+            string xmlfileCombine = Path.Combine(folderExportCombine, GlobalData.XmlFileName);
+            //Read XML File and Convert to List of TimeTable
+            _intakeTimetable = new DataParsing().ParseTimeTable(new DownloadLocalData().XmlFile(xmlfileCombine));
+
+            DataParsing.ParseTimeTableByDay(_intakeTimetable);
+        }
 
         public class TimetableDayClass
         {
@@ -96,11 +112,12 @@ namespace OnTime_lib.Activity
 
             public List<IntakeTimetable> IntakeTimetables { get; set; }
 
-            public TimetableDayClass(string weekDay, List<IntakeTimetable> intakeTimetables )
+            public TimetableDayClass(string weekDay, List<IntakeTimetable> intakeTimetables)
             {
                 WeekDay = weekDay;
                 IntakeTimetables = intakeTimetables;
             }
         }
+
     }
 }

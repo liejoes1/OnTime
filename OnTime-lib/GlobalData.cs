@@ -20,9 +20,12 @@ namespace OnTime_lib
         public const string FileName = "Timetable.zip";
         public const string ExtractFolderName = "Extract";
         public const string XmlFileName = "timetable.xml";
+        public const string CacheFileName = "cache.json";
+        public const string HtmlFileName = "timetable.html";
 
         // Shared Variable
         public static string IntakeCodeUrl;
+        public static string IntakeCode;
 
         // Shared Variable - Timetable based on Day
         public static List<IntakeTimetable> MondayTimetables = new List<IntakeTimetable>();
